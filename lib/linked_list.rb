@@ -1,23 +1,25 @@
+# Data Structures
 module DataStructures
+  # Main linked list class
   class LinkedList
+    # Node
     class Node
       attr_accessor :value, :pointer
 
       def self.count
         count = 0
-        ObjectSpace.each_object(self) do |i|
+        ObjectSpace.each_object(self) do |_i|
           count += 1
         end
       end
 
-      def initialize (value, pointer)
+      def initialize(value, _pointer)
         @value = value
-        pointer = pointer
       end
     end
 
     def insert(value)
-      if self.size > 0
+      if size > 0
         new_value = Node.new(value, nil)
         @tail.pointer = new_value
         @tail = new_value
@@ -59,12 +61,12 @@ module DataStructures
           csv_string << ":#{value}" if value.is_a? Symbol
         end
       end
-      csv_string.join(", ")
+      csv_string.join(', ')
     end
 
     private
 
-    def traverse(value, find_before = false, examining_value = @head)
+    def traverse(value, find_before = false, _examining_value = @head)
       if find_before
         one_behind_current(value, @head)
       else
@@ -73,7 +75,7 @@ module DataStructures
     end
 
     def collect
-      current(@tail, @head, true)
+      collect_current(@tail, @head)
     end
 
     def one_behind_current(value, examining_value = @head)
@@ -85,12 +87,20 @@ module DataStructures
 
     def current(value, examining_value = @head, collect = false)
       return [] if collect && examining_value.nil?
-      collection = [examining_value.value] if collect
       while value != examining_value.value && examining_value.pointer
         examining_value = examining_value.pointer
-        collection << examining_value.value if collect
       end
-      collect ? collection : examining_value
+      examining_value
+    end
+
+    def collect_current(value, examining_value = @head)
+      return [] if examining_value.nil?
+      collection = [examining_value.value]
+      while value != examining_value.value && examining_value.pointer
+        examining_value = examining_value.pointer
+        collection << examining_value.value
+      end
+      collection
     end
 
     def destroy(matched)
