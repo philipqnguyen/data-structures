@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'linked_list.rb'
+require 'stack.rb'
 include DataStructures
 
 describe 'Linked List' do
