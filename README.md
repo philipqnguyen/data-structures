@@ -1,3 +1,5 @@
+![](https://travis-ci.org/philipqnguyen/data-structures.svg?branch=master)
+
 # Data Structures
 
 By [Philip Q Nguyen](https://github.com/philipqnguyen)
