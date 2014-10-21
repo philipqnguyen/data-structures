@@ -63,6 +63,7 @@ q = DataStructures::Queue.new
 q.enqueue 'cat'
 q.enqueue 'dog'
 q.enqueue 'lion'
+q.size #=> 3
 q.to_s #=> "'cat', 'dog', 'lion'"
 q.dequeue
 q.to_s #=> "'dog', 'lion'"
