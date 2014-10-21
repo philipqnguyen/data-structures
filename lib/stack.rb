@@ -9,10 +9,10 @@ module DataStructures
 
     def pop
       if @tail.nil?
-        raise NoMethodError, 'Stack cannot be empty'
+        fail NoMethodError, 'Stack cannot be empty'
       else
         message = @tail.value
-        remove(search(@tail.value))
+        remove(@tail.value)
         message
       end
     end

@@ -6,6 +6,7 @@ include DataStructures
 describe 'Stack' do
   before do
     @stack = Stack.new
+    @stack.push 'cow'
     @stack.push 'bob'
     @stack.push 'cat'
   end
@@ -13,13 +14,13 @@ describe 'Stack' do
   it 'should push a new element to the stack' do
     @stack.push 'hello'
 
-    @stack.to_s.must_equal "'bob', 'cat', 'hello'"
+    @stack.to_s.must_equal "'cow', 'bob', 'cat', 'hello'"
   end
 
   it 'should pop an existing element out of the stack' do
     @stack.pop.must_equal 'cat'
 
-    @stack.to_s.must_equal "'bob', 'cat'"
+    @stack.to_s.must_equal "'cow', 'bob'"
   end
 end
 
