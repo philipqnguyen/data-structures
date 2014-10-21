@@ -40,7 +40,7 @@ linky.to_s #=> "'dog', :cat"
 
 ### Stack
 
-Stack inherits from Singly Lists and in addition to the inherited methods, the following methods are also available:
+Stack inherits from LinkedList and in addition to the inherited methods, the following methods are also available:
 
 - #push(data)
 - #pop
@@ -53,4 +53,17 @@ stack.push 'm'
 stack.to_s #=> "'o', 'p', 'm'"
 stack.pop
 stack.to_s #=> "'o', 'p'"
+```
+### Queue
+
+Queue inherits from LinkedList and in addition to the inherited methods, the following methods are also available:
+
+``` ruby
+q = DataStructures::Queue.new
+q.enqueue 'cat'
+q.enqueue 'dog'
+q.enqueue 'lion'
+q.to_s #=> "'cat', 'dog', 'lion'"
+q.dequeue
+q.to_s #=> "'dog', 'lion'"
 ```
