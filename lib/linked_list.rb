@@ -43,10 +43,10 @@ module DataStructures
       return nil if matched.value != value
       if @head.value == value
         @head = matched.pointer
+      elsif matched.value == @tail.value
+        swap_tail value
       else
-        before_match = traverse(value, true)
-        after_match = matched.pointer
-        before_match.pointer = after_match
+        swap_middle(matched, value)
       end
       destroy matched
     end
@@ -101,6 +101,18 @@ module DataStructures
         collection << examining_value.value
       end
       collection
+    end
+
+    def swap_tail(value)
+      before_match = traverse(value, true)
+      @tail = before_match
+      @tail.pointer = nil
+    end
+
+    def swap_middle(matched, value)
+      before_match = traverse(value, true)
+      after_match = matched.pointer
+      before_match.pointer = after_match
     end
 
     def destroy(matched)

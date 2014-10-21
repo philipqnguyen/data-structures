@@ -37,3 +37,20 @@ linky.remove 2
 
 linky.to_s #=> "'dog', :cat"
 ```
+
+### Stack
+
+Stack inherits from Singly Lists and in addition to the inherited methods, the following methods are also available:
+
+- #push(data)
+- #pop
+
+``` ruby
+stack = Stack.new
+stack.push 'o'
+stack.push 'p'
+stack.push 'm'
+stack.to_s #=> "'o', 'p', 'm'"
+stack.pop
+stack.to_s #=> "'o', 'p'"
+```
