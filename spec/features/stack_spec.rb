@@ -28,6 +28,6 @@ describe 'Empty Stack' do
   it 'should raise an exception if popping on an empty stack' do
     stack = Stack.new
 
-    proc { stack.pop }.must_raise NoMethodError
+    proc { stack.pop }.must_raise StackEmptyError
   end
 end

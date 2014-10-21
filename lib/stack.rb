@@ -1,6 +1,8 @@
 require 'linked_list.rb'
 # re-open DataStructures
 module DataStructures
+  # Error for Stack
+  class StackEmptyError < RuntimeError; end
   # Stack inherits from LinkedList
   class Stack < LinkedList
     def push(value)
@@ -9,11 +11,9 @@ module DataStructures
 
     def pop
       if @tail.nil?
-        fail NoMethodError, 'Stack cannot be empty'
+        fail StackEmptyError, 'Stack cannot be empty'
       else
-        message = @tail.value
         remove(@tail.value)
-        message
       end
     end
   end
