@@ -68,3 +68,17 @@ q.to_s #=> "'cat', 'dog', 'lion'"
 q.dequeue
 q.to_s #=> "'dog', 'lion'"
 ```
+
+## Hash Table
+
+HashTable class will create a new hash table with a specified size as its initial parameter. You can use `set(word)` and `get(word)` to set and get a word to and from the table.
+
+In this exercise, the key is the word itself and the value is the reversed word. To determine the placement of the word inside the table, each letters of the word are hashed into ordinal numbers, multiplied by base 127, and finally modulo by the size of the table. The resulting number will be the index of the cell of the hash table.
+
+In order to prevent collision, when a word is placed into the cell, it will spawn a linked list where the word will reside at the head of the list. Subsequent words that fall into the same specific cell will be linked to that existing linked list.
+
+``` ruby
+ht = DataStructures::HashTable.new 10 # initialize the hash table with 10 cells
+ht.set('hello') # This will hash the word and place into the table.
+ht.get('hello') # will find the word 'hello' and return the reversed version.
+```
