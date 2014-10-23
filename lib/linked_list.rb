@@ -4,7 +4,7 @@ module DataStructures
   class LinkedList
     # Node
     class Node
-      attr_accessor :value, :pointer
+      attr_accessor :value, :pointer, :reverse_word
 
       def self.count
         count = 0
@@ -13,18 +13,19 @@ module DataStructures
         end
       end
 
-      def initialize(value, _pointer)
+      def initialize(value, _pointer, reverse_word)
         @value = value
+        @reverse_word = reverse_word
       end
     end
 
-    def insert(value)
+    def insert(value, reverse_word = false)
       if size > 0
-        new_value = Node.new(value, nil)
+        new_value = Node.new(value, nil, reverse_word)
         @tail.pointer = new_value
         @tail = new_value
       else
-        @tail = Node.new(value, nil)
+        @tail = Node.new(value, nil, reverse_word)
         @head = @tail
       end
     end
