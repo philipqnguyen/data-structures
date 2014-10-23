@@ -24,6 +24,8 @@ module DataStructures
     end
 
     def set(word)
+      fail TypeError, 'Must be a string' unless word.is_a? String
+
       index = hash(word) % size
       if @table[index].nil?
         @table[index] = LinkedList.new

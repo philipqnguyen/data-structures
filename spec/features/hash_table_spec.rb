@@ -19,6 +19,10 @@ describe 'Hash table' do
     @hash.set('banana').must_equal 'ananab'
     @hash.get('banana').must_equal 'ananab'
   end
+
+  it 'should fail if argument is not a string' do
+    proc { @hash.set(15) }.must_raise TypeError
+  end
 end
 
 describe 'Hash the whole dictionary' do
