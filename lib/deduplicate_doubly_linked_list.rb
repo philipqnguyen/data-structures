@@ -2,6 +2,7 @@ require 'linked_list.rb'
 require 'hash_table.rb'
 include DataStructures
 
+# Re-open hastable
 class NonDupHashTable < HashTable
   def check(integer)
     index = hash(integer) % size
@@ -27,7 +28,9 @@ class NonDupHashTable < HashTable
   end
 end
 
-class List < LinkedList
+# new class List
+class List
+  # New class node
   class Node
     attr_accessor :value, :prev, :pointer
 
@@ -41,12 +44,12 @@ class List < LinkedList
   attr_reader :initial_count
 
   def initialize(initial_count)
-    if !initial_count.is_a? Integer
+    unless initial_count.is_a? Integer
       fail TypeError, 'Argument can only take an integer.'
     end
 
     n = 0
-    while n < initial_count do
+    while n < initial_count
       insert rand(100)
       n += 1
     end
@@ -64,53 +67,67 @@ class List < LinkedList
   end
 
   def deduplicate
-    examining_value = @head
     non_dup = NonDupHashTable.new 100
-    mark_for_removal = false
-    while examining_value.pointer
-      examining_value = examining_value.pointer
-      remove(examining_value.prev.value) if mark_for_removal
-      mark_for_removal = non_dup.check examining_value.value
+
+    current_node = @head
+    mark_remove = non_dup.check current_node.value
+    while current_node.pointer
+      current_node = current_node.pointer
+      remove current_node.prev.value if mark_remove
+      mark_remove = non_dup.check current_node.value
     end
-    remove examining_value.value if mark_for_removal
+    remove current_node.value if mark_remove
     collect
-  end
-
-  def remove(value)
-    matched = traverse value
-    return nil if matched.value != value
-    if @head.value == value
-      @head = matched.pointer
-    elsif matched.value == @tail.value
-      swap_tail value
-    else
-      swap_middle(matched, value)
-    end
-    destroy matched
-  end
-
-  def to_a
-    collect
-  end
-
-  private
-
-  def swap_middle(matched, value)
-    before_match = traverse(value, true)
-    after_match = matched.pointer
-    before_match.pointer = after_match
-    after_match.prev = before_match
   end
 
   def collect
-    collect_current(@tail, @head)
+    current_node = @head
+    box = [current_node.value]
+    while current_node.pointer
+      current_node = current_node.pointer
+      box << current_node.value
+    end
+    box
   end
 
-  def collect_current(value, examining_value = @head)
-    super
+  def remove(value, current_node = @head)
+    match = @head if @head.value == value
+    while current_node.pointer
+      current_node = current_node.pointer
+      match = current_node if current_node.value == value
+      break if match
+    end
+    swap_and_destroy match if match
   end
 
-  def destroy(matched)
-    matched.pointer = nil
+  def size
+    @head ? n = 1 : n = 0
+
+    current_node = @head
+    while @head && current_node.pointer
+      current_node = current_node.pointer
+      n += 1
+    end
+    n
+  end
+
+  def swap_and_destroy(match)
+    swap match if match
+    destroy match if match
+  end
+
+  def destroy(match)
+    match.prev = nil
+    match.pointer = nil
+  end
+
+  def swap(match)
+    if match.pointer.nil?
+      @tail = match.prev
+    elsif match.prev.nil?
+      @head = match.pointer
+    end
+    match.prev.pointer = match.pointer if match.prev
+    match.pointer.prev = match.prev if match.pointer
   end
 end
