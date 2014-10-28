@@ -6,6 +6,10 @@ describe 'Doubly linked list' do
     @list = List.new(200)
   end
 
+  it 'should fail if argument is not a number' do
+    proc { List.new('hello') }.must_raise TypeError
+  end
+
   it 'should have 200 nodes' do
     @list.size.must_equal 200
   end
