@@ -84,3 +84,11 @@ ht = DataStructures::HashTable.new 10 # initialize the hash table with 10 cells
 ht.set('hello') # This will hash the word and place into the table.
 ht.get('hello') # will find the word 'hello' and return the reversed version.
 ```
+
+## Deduplicate a Doubly Linked List
+
+There are tests included to check for duplication in a doubly linked list. It uses a HashTable to track if an exisitng number is already in the hash.
+
+First, initiate a new doubly linked list with a size (number of nodes) as argument: `l = List.new 200`. This will create 200 nodes with each containing a random value between 0 through 99.
+
+`l.deduplicate` will deduplicate the doubly linked list and return the new values in an array.
