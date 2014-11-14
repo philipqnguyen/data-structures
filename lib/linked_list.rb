@@ -30,6 +30,20 @@ module DataStructures
       end
     end
 
+    def reverse
+      prev = @head
+      pivot = @head
+
+      while prev.pointer != nil
+        temp = pivot.pointer
+        pivot.pointer = @head
+        prev.pointer = temp
+        @head = pivot
+        pivot = temp
+      end
+      to_s
+    end
+
     def size
       collect.count
     end
