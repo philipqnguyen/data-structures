@@ -20,6 +20,7 @@ The following methods are available:
 - `#insert(data)`
 - `#search(data)`
 - `#size`
+- `#reverse`
 - `#remove(data)`
 - `#to_s` will print a CSV compatible string of all the data values.
 
@@ -38,6 +39,8 @@ linky.search :cat #=> #<DataStructures::LinkedList::Node:0x007f81a3370308 @value
 linky.remove 2
 
 linky.to_s #=> "'dog', :cat"
+
+linky.reverse #=> ":cat, 2, 'dog'"
 ```
 
 ### Stack
